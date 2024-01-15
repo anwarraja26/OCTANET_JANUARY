@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="todo.css">
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List (OCTANET TASK 2)</h1>
+        <form id="todo-form">
+            <input type="text" id="new-todo" placeholder="Add a task...">
+            <button type="submit">Add</button>
+        </form>
+        <ul id="todo-list"></ul>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script>
+        document.getElementById('todo-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const newTodo = document.getElementById('new-todo').value;
+            const todoList = document.getElementById('todo-list');
+
+            if (newTodo.trim()) {
+                const newLi = document.createElement('li');
+                newLi.innerHTML = `
+                    <span>${newTodo}</span>
+                    <button class="delete-btn">Delete</button>
+                `;
+                todoList.appendChild(newLi);
+                document.getElementById('new-todo').value = '';
+            }
+        });
+
+        document.getElementById('todo-list').addEventListener('click', function(event) {
+            if (event.target.classList.contains('delete-btn')) {
+                event.target.parentNode.remove();
+            }
+        });
+    </script>
+</body>
+</html>
